@@ -21,3 +21,13 @@ Main page styles
     background-size: contain;
   }
 }
+
+.jumbotron {
+  background-color: #fff;
+  color: black;
+  background-image: url('../../content/images/welcome.jpg');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 75vh;
+}
