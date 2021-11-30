@@ -1,6 +1,18 @@
-# geodataApp
+# Geodata Angular frontend App
+
+![](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white&style=flat)
+![](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white&style=flat)
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white&style=flat)
 
 This application was generated using JHipster 7.4.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.4.0](https://www.jhipster.tech/documentation-archive/v7.4.0).
+
+
+|Component   | Version  |
+|------------|----------|
+| Jhipster   | 7.4.0    |
+| Angular    | 12.2.12  |
+| Bootstrap  | ?        |
+
 
 ## Development
 
