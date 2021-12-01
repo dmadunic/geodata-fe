@@ -124,18 +124,34 @@ docker build -t ag04/geodata-ng:latest -f ./Dockerfile .
 Optionally you can replace "latest" with the active project version from package.json
 
 ### Using docker image
-TODO: Write me ...
 
-Angular frontend app docker image requieres several environment variables to be configures:
+Geodata angular frontend app docker image requiers several environment variables to be configured:
 
+|Environment variable | Description              |
+|---------------------|--------------------------|
+| GEODATA_API_URL     | Url of the Geodata rest API (ie. http://host.docker.internal:8080/api) |
+| GEODATA_MNGMT_URL   | Url of actuator management endpoint (ie. http://host.docker.internal:8080/management) |
+| GEODATA_SWAGGER_URL | Url of the generated Swagger API (ie. http://host.docker.internal:8080/swagger-resources) |
+| GEODATA_AUTH_URL    | Url of the ? (ie. http://host.docker.internal:8080/auth) |
 
-GEODATA_API_URL=http://host.docker.internal:8080/api
+For an example how to use this image see the docker-docompose file: **docker/app.yml**
+
+```yaml
+version: '2'
+services:
+  nginx:
+    image: ag04/geodata-ng:latest
+    environment:
+      - GEODATA_API_URL=http://host.docker.internal:8080/api
       - GEODATA_MNGMT_URL=http://host.docker.internal:8080/management
       - GEODATA_SWAGGER_URL=http://host.docker.internal:8080/swagger-resources
       - GEODATA_AUTH_URL=http://host.docker.internal:8081/auth
-
-
-For an example how to use this image see the docker-docompose file: **docker/app.yml**
+    # On macOSX and Windows env comment the following two lines, they are linux workaround
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+    - "9000:80"
+```
 
 
 ### Client tests
