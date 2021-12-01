@@ -7,16 +7,16 @@ server {
     root /usr/share/nginx/html;
 
     location /api {
-        proxy_pass http://host.docker.internal:8080/api;
+        proxy_pass ${GEODATA_API_URL};
     }
     location /management {
-        proxy_pass http://host.docker.internal:8080/management;
+        proxy_pass ${GEODATA_MNGMT_URL};
     }
     location /swagger-resources {
-        proxy_pass http://host.docker.internal:8080/swagger-resources;
+        proxy_pass ${GEODATA_SWAGGER_URL};
     }
     location /auth {
-       proxy_pass http://host.docker.internal:8081/auth;
+       proxy_pass ${GEODATA_AUTH_URL};
     }
  
     location / {

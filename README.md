@@ -113,19 +113,29 @@ Inside root project folder execute:
 
 ```bash
 npm install
-nupm run webapp:prod
+npm run webapp:prod
 ```
 
 **2. Build local docker image**
 
 ```bash
-docker build -t ag04/geodata-ng-app:latest -f ./Dockerfile .
+docker build -t ag04/geodata-ng:latest -f ./Dockerfile .
 ```
 Optionally you can replace "latest" with the active project version from package.json
 
 ### Using docker image
-
 TODO: Write me ...
+
+Angular frontend app docker image requieres several environment variables to be configures:
+
+
+GEODATA_API_URL=http://host.docker.internal:8080/api
+      - GEODATA_MNGMT_URL=http://host.docker.internal:8080/management
+      - GEODATA_SWAGGER_URL=http://host.docker.internal:8080/swagger-resources
+      - GEODATA_AUTH_URL=http://host.docker.internal:8081/auth
+
+
+For an example how to use this image see the docker-docompose file: **docker/app.yml**
 
 
 ### Client tests

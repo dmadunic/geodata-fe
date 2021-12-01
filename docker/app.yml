@@ -1,7 +1,13 @@
 version: '2'
 services:
   nginx:
-    image: geodata-ng-fe:latest
+    image: ag04/geodata-ng:latest
+    environment:
+      - GEODATA_API_URL=http://host.docker.internal:8080/api
+      - GEODATA_MNGMT_URL=http://host.docker.internal:8080/management
+      - GEODATA_SWAGGER_URL=http://host.docker.internal:8080/swagger-resources
+      - GEODATA_AUTH_URL=http://host.docker.internal:8081/auth
+    # On macOSX and Windows env comment the following two lines, they are linux workaround
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
