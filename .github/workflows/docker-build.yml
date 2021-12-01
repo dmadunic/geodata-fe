@@ -1,0 +1,74 @@
+#==============================================================================
+# Manual CI/CD github pipline script: 
+#   - tests
+#   - build
+#   - publish docker image to DockerHub
+#
+# This script to work requires the following secrets to be defined:
+# - DOCKER_USERNAME : 
+# - DOCKER_PASSWORD : 
+#
+# (c) Agency04 / Domagoj Madunić
+#==============================================================================
+name: Build target version docker image
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Target version for the operation (project/latest*)'
+        required: true
+        default: 'latest'
+
+jobs:
+  pipeline:
+    name: Setup, Build and Publish docker image
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      NODE_VERSION: 16.13.0
+      JHI_DISABLE_WEBPACK_LOGS: true
+    steps:
+    - uses: docker/setup-qemu-action@v1
+    - uses: docker/setup-buildx-action@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 16.13.0
+    - name: Install node.js packages
+      id: install-node-js
+      run: npm install
+    - name: Init project version
+      id: get-npm-version
+      uses: martinbeentjes/npm-get-version-action@master
+    - name: Set targetOpVersion
+      id: setVersion
+      run: |
+        if [[ "${{ github.event.inputs.version }}" == "project" ]]; then
+          echo "::set-output name=targetVersion::${{ steps.get-npm-version.outputs.current-version }}"
+        fi
+        if [[ "${{ github.event.inputs.version }}" == "latest" ]]; then
+          echo "::set-output name=targetVersion::latest"
+        fi
+    - name: Install node.js packages
+      id: install-node-js
+      run: npm install
+    - name: Run frontend tests
+      id: frontend-tests
+      run: npm test
+    - name: Build application
+      id: build-ng-app
+      run: npm run webapp:prod
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Push docker image to DockerHub
+      id: docker-push
+      uses: docker/build-push-action@v2
+      with:
+        context: ./
+        push: true
+        tags: ag04/geodata-ng:latest
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
