@@ -1,5 +1,6 @@
 # Geodata Angular frontend App
 
+![GeodataNgApp CI/CD](https://github.com/dmadunic/geodata-ng/workflows/GeodataNgApp%20CI/CD/badge.svg?branch=master)
 ![](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white&style=flat)
 ![](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white&style=flat)
 ![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white&style=flat)

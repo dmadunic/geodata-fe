@@ -66,6 +66,6 @@ jobs:
       with:
         context: ./
         push: true
-        tags: ag04/geodata-ng:latest
+        tags: ag04/geodata-ng:${{ steps.setVersion.outputs.targetVersion }}
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
