@@ -34,9 +34,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 16.13.0
-    - name: Install node.js packages
-      id: install-node-js
-      run: npm install
     - name: Init project version
       id: get-npm-version
       uses: martinbeentjes/npm-get-version-action@master
